@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank Customer Churn Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fa-solid fa-building-columns"></i> Bank Customer Churn Predictor</h1>
+        <form action="/predict" method="post">
+            <label>Credit Score</label>
+            <input type="number" name="CreditScore" placeholder="Enter credit score (e.g., 500–850)" required>
+
+            <label>Age</label>
+            <input type="number" name="Age" placeholder="Enter age (e.g., 30)" required>
+
+            <label>Tenure</label>
+            <input type="number" name="Tenure" placeholder="Enter tenure in years (e.g., 3)" required>
+
+            <label>Balance</label>
+            <input type="number" name="Balance" placeholder="Enter balance (e.g., 50000)" required>
+
+            <label>Number of Products</label>
+            <input type="number" name="NumOfProducts" placeholder="Enter no. of products (1 or 2)" required>
+
+            <label>Has Credit Card</label>
+            <input type="number" name="HasCrCard" placeholder="1 for Yes, 0 for No" required>
+
+            <label>Is Active Member</label>
+            <input type="number" name="IsActiveMember" placeholder="1 for Yes, 0 for No" required>
+
+            <label>Estimated Salary</label>
+            <input type="number" name="EstimatedSalary" placeholder="Enter salary (e.g., 75000)" required>
+
+            <button type="submit"><i class="fa-solid fa-circle-check"></i> Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">
+                <i class="fa-solid fa-bullhorn"></i> {{ prediction_text }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
