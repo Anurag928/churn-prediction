@@ -1,0 +1,10 @@
+# render.yaml
+
+services:
+  - type: web
+    name: churn-prediction-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    plan: free
+    autoDeploy: true
