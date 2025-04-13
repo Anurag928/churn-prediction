@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='history.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Prediction History</h2>
+
+        <!-- Render the HTML table from history_html -->
+        <div class="table-responsive">
+            {{ history_html | safe }}
+        </div>
+
+        <br>
+        <a href="/" class="btn-history">Go Back to Prediction</a>
+    </div>
+
+</body>
+</html>

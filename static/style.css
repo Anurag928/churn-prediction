@@ -10,7 +10,7 @@ body {
 
 .container {
     background: rgba(0, 0, 0, 0.85);
-    width: 600px; /* ⬅️ Increased width */
+    width: 600px;
     padding: 40px;
     margin: 80px auto;
     border-radius: 20px;
@@ -70,4 +70,22 @@ button:hover {
     padding: 15px;
     border-radius: 12px;
     color: #00ff99;
+}
+
+.btn-history {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-history:hover {
+    background-color: #00cc99;
+    color: white;
 }

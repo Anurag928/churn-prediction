@@ -7,8 +7,8 @@ from sklearn.model_selection import train_test_split
 # Load dataset
 df = pd.read_csv("Churn_Modelling_Indian_Names_Ordered.csv")
 
-# Drop unnecessary columns
-df = df.drop(['RowNumber', 'CustomerId', 'Name', 'Gender', 'Geography'], axis=1)
+# Drop unnecessary columns, including 'NumberOfProducts'
+df = df.drop(['RowNumber', 'CustomerId', 'Name', 'Gender', 'Geography', 'NumOfProducts'], axis=1)
 
 # Split features and target
 X = df.drop('Exited', axis=1)

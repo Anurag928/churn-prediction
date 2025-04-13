@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank Customer Churn Prediction</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -9,6 +10,7 @@
 <body>
     <div class="container">
         <h1><i class="fa-solid fa-building-columns"></i> Bank Customer Churn Predictor</h1>
+        
         <form action="/predict" method="post">
             <label>Credit Score</label>
             <input type="number" name="CreditScore" placeholder="Enter credit score (e.g., 500–850)" required>
@@ -21,9 +23,6 @@
 
             <label>Balance</label>
             <input type="number" name="Balance" placeholder="Enter balance (e.g., 50000)" required>
-
-            <label>Number of Products</label>
-            <input type="number" name="NumOfProducts" placeholder="Enter no. of products (1 or 2)" required>
 
             <label>Has Credit Card</label>
             <input type="number" name="HasCrCard" placeholder="1 for Yes, 0 for No" required>
@@ -42,6 +41,13 @@
                 <i class="fa-solid fa-bullhorn"></i> {{ prediction_text }}
             </div>
         {% endif %}
+
+        <!-- View History Button -->
+        <div style="text-align: center;">
+            <a href="/history" class="btn-history">
+                <i class="fa-solid fa-clock-rotate-left"></i> View Prediction History
+            </a>
+        </div>
     </div>
 </body>
 </html>
