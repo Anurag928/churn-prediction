@@ -49,5 +49,13 @@
             </a>
         </div>
     </div>
+
+    <!-- Add this right after the <body> tag -->
+    <div class="nav-username">
+        Welcome, {{ username }}! 
+        <a href="{{ url_for('logout') }}" class="logout-btn">
+            <i class="fa-solid fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
 </body>
 </html>
