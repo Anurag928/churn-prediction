@@ -6,22 +6,15 @@ from datetime import datetime
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 import secrets
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
 
 # Initialize Flask app
 app = Flask(__name__)
 
-# Set secret key from environment variable, fall back to generated key if not found
+# Set secret key - for production, use environment variable
 app.secret_key = os.environ.get('FLASK_SECRET_KEY')
 if not app.secret_key:
     # Generate a new key if environment variable is not set
-    generated_key = secrets.token_hex(24)
-    app.secret_key = generated_key
-    # Optionally warn about using a generated key
-    print("Warning: Using generated secret key. Set FLASK_SECRET_KEY environment variable for production use.")
+    app.secret_key = secrets.token_hex(24)
 
 # Set path to model
 model_path = os.path.join('model', 'xgb_model.pkl')
@@ -39,7 +32,8 @@ except Exception as e:
 history_file = 'history.csv'
 
 def init_db():
-    conn = sqlite3.connect('predictions.db')
+    db_path = os.environ.get('DATABASE_URL', 'predictions.db')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
     # Create predictions table
     c.execute('''CREATE TABLE IF NOT EXISTS predictions

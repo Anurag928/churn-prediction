@@ -2,9 +2,14 @@
 
 services:
   - type: web
-    name: churn-prediction-app
+    name: bank-churn-predictor
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: 3.11.0
     plan: free
     autoDeploy: true
