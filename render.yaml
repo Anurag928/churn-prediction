@@ -4,12 +4,15 @@ services:
   - type: web
     name: bank-churn-predictor
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install --upgrade pip
+      pip install numpy==1.21.2
+      pip install -r requirements.txt
     startCommand: gunicorn app:app
     envVars:
       - key: FLASK_SECRET_KEY
         generateValue: true
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: 3.9.0
     plan: free
     autoDeploy: true
