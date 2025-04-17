@@ -6,13 +6,13 @@ services:
     env: python
     buildCommand: |
       pip install --upgrade pip
-      pip install numpy==1.21.2
+      pip install wheel
       pip install -r requirements.txt
     startCommand: gunicorn app:app
     envVars:
       - key: FLASK_SECRET_KEY
         generateValue: true
       - key: PYTHON_VERSION
-        value: 3.9.0
+        value: 3.9.18
     plan: free
     autoDeploy: true
