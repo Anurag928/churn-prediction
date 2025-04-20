@@ -1,1 +1,2 @@
-CreditScore,Age,Tenure,Balance,HasCrCard,IsActiveMember,EstimatedSalary,Prediction
+Date,CreditScore,Age,Tenure,Balance,HasCrCard,IsActiveMember,EstimatedSalary,Prediction
+2025-04-20 07:57:11,789,34,4,6789.0,Yes,Yes,67890.0,Customer Will Stay

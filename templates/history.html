@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction History</title>
-<!-- <link rel="stylesheet" href="{{ url_for('static', filename='history.css') }}"> -->
-    <link rel="stylesheet" href="../static/history.css"/>
+    <link rel="stylesheet" href="../static/history.css" />
 </head>
 <body>
 
@@ -14,7 +13,7 @@
 
         <div class="table-responsive">
             {% if predictions and predictions|length > 0 %}
-                <table class="history-table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -49,7 +48,6 @@
             {% endif %}
         </div>
 
-        <br>
         <a href="/" class="btn-history">Go Back to Prediction</a>
     </div>
 

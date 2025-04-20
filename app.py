@@ -149,6 +149,67 @@ def logout():
 def predictor():
     return render_template('index.html', username=current_user.username)
 
+# @app.route('/predict', methods=['POST'])
+# @login_required
+# def predict():
+#     if model is None:
+#         load_model()  # Try to reload the model
+#         if model is None:
+#             flash('Error: Model not loaded. Please try again later.', 'error')
+#             return redirect(url_for('home'))
+    
+#     try:
+#         # Get form data
+#         required_fields = ['CreditScore', 'Age', 'Tenure', 'Balance', 'HasCrCard', 'IsActiveMember', 'EstimatedSalary']
+#         features = []
+#         for field in required_fields:
+#             value = request.form.get(field, '').strip()
+#             if not value:
+#                 flash(f'Please fill in the {field} field.', 'error')
+#                 return redirect(url_for('home'))
+#             try:
+#                 features.append(float(value))
+#             except ValueError:
+#                 flash(f'Invalid input for {field}. Please enter a valid number.', 'error')
+#                 return redirect(url_for('home'))
+        
+#         # Make prediction using DataFrame with correct feature names
+#         import pandas as pd
+#         feature_names = ['CreditScore', 'Age', 'Tenure', 'Balance', 'HasCrCard', 'IsActiveMember', 'EstimatedSalary']
+#         input_df = pd.DataFrame([features], columns=feature_names)
+#         prediction = model.predict(input_df)
+#         result = "Customer Will Churn" if prediction[0] == 1 else "Customer Will Stay"
+        
+#         # Save prediction to database
+#         prediction_record = Prediction(
+#             user_id=current_user.id,
+#             credit_score=int(features[0]),
+#             age=int(features[1]),
+#             tenure=int(features[2]),
+#             balance=features[3],
+#             has_credit_card=int(features[4]),
+#             is_active_member=int(features[5]),
+#             estimated_salary=features[6],
+#             result=result
+#         )
+        
+#         db.session.add(prediction_record)
+#         db.session.commit()
+        
+#         # Show success message with prediction
+#         # flash(f'Prediction Result: {result}', 'success')
+#         # return redirect(url_for('history'))
+
+#         prediction_text = f'Prediction Result: {result}'
+#         return render_template('index.html', prediction_text=prediction_text, username=current_user.username)
+#     except ValueError as e:
+#         flash(f'Input error: {str(e)}', 'error')
+#         return redirect(url_for('home'))
+#     except Exception as e:
+#         db.session.rollback()
+#         flash(f'Error making prediction: {str(e)}', 'error')
+#         return redirect(url_for('home'))
+
 @app.route('/predict', methods=['POST'])
 @login_required
 def predict():
@@ -172,14 +233,13 @@ def predict():
             except ValueError:
                 flash(f'Invalid input for {field}. Please enter a valid number.', 'error')
                 return redirect(url_for('home'))
-        
+
         # Make prediction using DataFrame with correct feature names
-        import pandas as pd
         feature_names = ['CreditScore', 'Age', 'Tenure', 'Balance', 'HasCrCard', 'IsActiveMember', 'EstimatedSalary']
         input_df = pd.DataFrame([features], columns=feature_names)
         prediction = model.predict(input_df)
         result = "Customer Will Churn" if prediction[0] == 1 else "Customer Will Stay"
-        
+
         # Save prediction to database
         prediction_record = Prediction(
             user_id=current_user.id,
@@ -192,14 +252,37 @@ def predict():
             estimated_salary=features[6],
             result=result
         )
-        
+
         db.session.add(prediction_record)
         db.session.commit()
-        
-        # Show success message with prediction
-        flash(f'Prediction Result: {result}', 'success')
-        return redirect(url_for('history'))
-    
+
+        # Save prediction to CSV
+        csv_file = os.path.join('history.csv')
+        prediction_data = {
+            'Date': prediction_record.date.strftime('%Y-%m-%d %H:%M:%S'),
+            'Username': current_user.username,
+            'Credit Score': prediction_record.credit_score,
+            'Age': prediction_record.age,
+            'Tenure': prediction_record.tenure,
+            'Balance': prediction_record.balance,
+            'Has Credit Card': 'Yes' if prediction_record.has_credit_card else 'No',
+            'Is Active Member': 'Yes' if prediction_record.is_active_member else 'No',
+            'Estimated Salary': prediction_record.estimated_salary,
+            'Result': prediction_record.result
+        }
+
+        file_exists = os.path.isfile(csv_file)
+        try:
+            with open(csv_file, mode='a', newline='', encoding='utf-8') as file:
+                df = pd.DataFrame([prediction_data])
+                df.to_csv(file, index=False, header=not file_exists)
+        except Exception as e:
+            flash(f"Failed to save history to CSV: {e}", 'error')
+
+        # Show prediction on the same page
+        prediction_text = f'Prediction Result: {result}'
+        return render_template('index.html', prediction_text=prediction_text, username=current_user.username)
+
     except ValueError as e:
         flash(f'Input error: {str(e)}', 'error')
         return redirect(url_for('home'))
