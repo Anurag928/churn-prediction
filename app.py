@@ -257,7 +257,8 @@ def predict():
         db.session.commit()
 
         # Save prediction to CSV
-        csv_file = os.path.join('history.csv')
+        #csv_file = os.path.join('history.csv')
+        csv_file = os.path.join(os.getcwd(), 'history.csv')
         prediction_data = {
             'Date': prediction_record.date.strftime('%Y-%m-%d %H:%M:%S'),
             'Username': current_user.username,
