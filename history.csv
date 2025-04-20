@@ -1,16 +1,1 @@
 CreditScore,Age,Tenure,Balance,HasCrCard,IsActiveMember,EstimatedSalary,Prediction
-500,30,5,52.0,0,75000.0,The customer will not churn.,
-500,30,5,51.0,0,50000.0,The customer will not churn.,
-500,30,5,50.0,0,50000.0,The customer will not churn.,
-500,42,5,50000.0,0,50000.0,The customer will not churn.,
-500,45,5,20.0,0,50000.0,The customer will not churn.,
-600,62,5,50.0,0,50000.0,The customer will churn.,
-500,45,5,50000.0,0,750000.0,The customer will churn.,
-500,50,7,50.0,0,0.0,The customer will not churn.,
-600,45,10,50000.0,0,500000.0,The customer will not churn.,
-500,45,5,50000.0,0,500000.0,The customer will churn.,
-555,30,3,500000.0,0,50000.0,The customer will not churn.,
-500,36,9,50000.0,1,500000.0,The customer will not churn.,
-600,58,6,500000.0,1,5803666.0,The customer will not churn.,
-600,40,5,10000000.0,1,1.0,1000000.0,The customer will not churn.
-500,25,5,2588963147.0,1,0,258963147.0,The customer will not churn.
