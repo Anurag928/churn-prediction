@@ -1,2 +1,5 @@
 Date,CreditScore,Age,Tenure,Balance,HasCrCard,IsActiveMember,EstimatedSalary,Prediction
 2025-04-20 07:57:11,789,34,4,6789.0,Yes,Yes,67890.0,Customer Will Stay
+2025-04-30 06:52:55,750,30,4,70000.0,Yes,Yes,1000000.0,Customer Will Stay
+2025-04-30 13:40:19,k,600,42,3,75000.0,Yes,No,50000.0,Customer Will Stay
+2025-05-02 13:15:50,k,700,423,5,50000.0,Yes,No,75000.0,Customer Will Stay
